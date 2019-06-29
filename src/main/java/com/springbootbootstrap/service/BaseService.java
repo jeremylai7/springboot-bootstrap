@@ -1,5 +1,8 @@
 package com.springbootbootstrap.service;
 
+import com.springbootbootstrap.util.PageBean;
+import com.springbootbootstrap.util.TableData;
+
 import java.util.List;
 
 /**
@@ -43,8 +46,8 @@ public interface BaseService<T> {
 
     /**
      * 查询表格列表
-     * @param t 分页参数
+     * @param
      * @return
      */
-    //TableData<T> getTableData(PageBean pageBean);
+    TableData<T> getTableData(PageBean pageBean);
 }

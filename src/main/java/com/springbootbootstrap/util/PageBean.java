@@ -11,12 +11,22 @@ import lombok.Setter;
 @Setter
 public class PageBean {
     /**
-     * 页码
+     * 开始显示的下标
      */
-    private Integer pageNumber;
+    private Integer offset;
 
     /**
-     * 每页显示个数
+     * 每页大小
      */
-    private Integer pageSize;
+    private Integer limit;
+
+    /**
+     * 搜索
+     */
+    private String search;
+
+    /**
+     * 排序
+     */
+    private String order;
 }

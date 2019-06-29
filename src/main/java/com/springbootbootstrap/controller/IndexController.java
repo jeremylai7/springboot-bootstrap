@@ -2,11 +2,11 @@ package com.springbootbootstrap.controller;
 
 import com.springbootbootstrap.model.User;
 import com.springbootbootstrap.service.UserService;
+import com.springbootbootstrap.util.PageBean;
+import com.springbootbootstrap.util.TableData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -28,6 +28,13 @@ public class IndexController {
         System.out.println(list);
         ModelAndView mv = new ModelAndView("index");
         return mv;
+    }
+
+    @GetMapping("/getTableData")
+    @ResponseBody
+    public TableData<User> getTableData(PageBean pageBean){
+        TableData<User> tableData = userService.getTableData(pageBean);
+        return tableData;
     }
 
 
