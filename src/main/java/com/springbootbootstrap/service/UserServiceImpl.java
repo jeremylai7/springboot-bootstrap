@@ -5,7 +5,9 @@ import com.springbootbootstrap.dao.UserDao;
 import com.springbootbootstrap.model.User;
 import com.springbootbootstrap.util.PageBean;
 import com.springbootbootstrap.util.TableData;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -29,7 +31,15 @@ public class UserServiceImpl implements UserService{
         int count = userDao.selectCount(null);
         if (count > 0){
             PageHelper.startPage((pageBean.getOffset()/pageBean.getLimit()) + 1, pageBean.getLimit());
-            List<User> list = userDao.selectAll();
+            Example example = new Example(User.class);
+            if (StringUtils.isNotBlank(pageBean.getOrder())){
+                example.setOrderByClause(pageBean.getSort()+" "+pageBean.getOrder());
+            }
+            Example.Criteria criteria = example.createCriteria();
+            if (StringUtils.isNotBlank(pageBean.getSearch())){
+                criteria.andLike(pageBean.getSort(),"%"+pageBean.getSearch()+"%");
+            }
+            List<User> list = userDao.selectByExample(example);
             return TableData.bulid(count,list);
         }
         return TableData.empty();

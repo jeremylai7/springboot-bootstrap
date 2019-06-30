@@ -2791,7 +2791,7 @@
 	  onlyInfoPagination: false,
 	  showExtendedPagination: false,
 	  paginationLoop: true,
-	  sidePagination: 'server',
+	  sidePagination: 'client',
 	  // client or server
 	  totalRows: 0,
 	  totalNotFiltered: 0,

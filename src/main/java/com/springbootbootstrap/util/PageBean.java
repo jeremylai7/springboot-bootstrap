@@ -29,4 +29,9 @@ public class PageBean {
      * 排序
      */
     private String order;
+
+    /**
+     * 搜索字段
+     */
+    private String sort;
 }
