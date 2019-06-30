@@ -28,8 +28,9 @@
     <script src="${ctx}/js/jquery.min.js"></script>
     <script src="${ctx}/js/bootstrap.js"></script>
     <script src="${ctx}/js/bootstrap-table.js"></script>
-    <#--<script src="${ctx}/js/bootstrap-table-zh-CN.js"></script>-->
+    <script src="${ctx}/js/bootstrap-table-zh-CN.js"></script>
     <script type="text/javascript">
+        
         function queryParams(params) {
             var query={};
             query["limit"] = params.limit;//第几条数据开始

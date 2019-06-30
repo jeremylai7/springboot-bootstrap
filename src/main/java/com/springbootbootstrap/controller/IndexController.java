@@ -33,12 +33,6 @@ public class IndexController {
     @GetMapping("/getTableData")
     @ResponseBody
     public TableData<User> getTableData(PageBean pageBean){
-        if (pageBean.getLimit() == null){
-            pageBean.setLimit(10);
-        }
-        if (pageBean.getOffset() == null){
-            pageBean.setOffset(0);
-        }
         TableData<User> tableData = userService.getTableData(pageBean);
         return tableData;
     }

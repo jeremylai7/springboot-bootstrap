@@ -2746,7 +2746,7 @@
 	  }
 	}[bootstrapVersion];
 	var DEFAULTS = {
-	  height: 250,
+	  height: undefined,
 	  classes: 'table table-bordered table-hover',
 	  theadClasses: '',
 	  rowStyle: function rowStyle(row, index) {
