@@ -2746,7 +2746,7 @@
 	  }
 	}[bootstrapVersion];
 	var DEFAULTS = {
-	  height: undefined,
+	  height: 250,
 	  classes: 'table table-bordered table-hover',
 	  theadClasses: '',
 	  rowStyle: function rowStyle(row, index) {
@@ -2791,7 +2791,7 @@
 	  onlyInfoPagination: false,
 	  showExtendedPagination: false,
 	  paginationLoop: true,
-	  sidePagination: 'client',
+	  sidePagination: 'server',
 	  // client or server
 	  totalRows: 0,
 	  totalNotFiltered: 0,
