@@ -4,8 +4,6 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-  mybatis:
-    config-location: classpath:/mybatis/config.xml
   mapper:
     not-empty: false
     identity: MYSQL
@@ -24,4 +22,6 @@ spring:
     prefer-file-system-access: true
     suffix: .ftl
     template-loader-path: classpath:/templates/
+mybatis:
+  config-location: classpath:/mybatis/config.xml
 
