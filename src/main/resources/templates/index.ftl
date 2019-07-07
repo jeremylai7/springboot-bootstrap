@@ -10,11 +10,12 @@
 <body>
     <div class="container">
         <div class="row">
-			<table data-toggle="table"  data-side-pagination="server" data-search="true"
+			<table id="table" data-toggle="table"  data-side-pagination="server" data-search="true"
                    data-pagination="true" data-query-params="queryParams"  data-pagination-loop="false"
-                   data-url="${ctx}/index/getTableData">
+                   data-click-to-select="true" data-url="${ctx}/index/getTableData">
                 <thead>
                     <tr>
+                        <th data-checkbox="true"></th>
                         <th data-field="id" data-align="center" 	data-sortable="true">id</th>
                         <th data-field="roleId" data-align="center">rowid</th>
                         <th data-field="username" data-align="center" data-sortable="true">username</th>
@@ -25,6 +26,10 @@
                     </tr>
                 </thead>
             </table>
+        </div>
+        <div class="row">
+            <button type="button" id="add" class="btn btn-primary pull-right">新增</button>
+            <button type="button" id="del" class="btn btn-success pull-right">删除</button>
         </div>
     </div>
     <script src="${ctx}/js/jquery.min.js"></script>
@@ -41,6 +46,26 @@
             query["order"] = params.order;//排序
             return query;
         }
+
+        $("#add").click(function () {
+
+        })
+        $("#del").click(function () {
+            var select = $("#table").bootstrapTable('getSelections');
+            //批量删除
+            console.log(select);
+            var ids = "";
+            for(var i = 0;i < select.length;i++){
+                ids +=","+select[i].id;
+            }
+            ids = ids.substr(1);
+            if(ids != ""){
+                $.post("${ctx}/index/delete",{ids:ids},function (result) {
+                    console.log(result);
+                })
+            }
+
+        })
     </script>
 </body>
 </html>

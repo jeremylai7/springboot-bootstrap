@@ -33,8 +33,20 @@ public class IndexController {
     @GetMapping("/getTableData")
     @ResponseBody
     public TableData<User> getTableData(PageBean pageBean){
+        if (pageBean.getLimit() == null){
+            pageBean.setLimit(10);
+        }
+        if (pageBean.getOffset() == null){
+            pageBean.setLimit(0);
+        }
         TableData<User> tableData = userService.getTableData(pageBean);
         return tableData;
+    }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    public void delete(String ids){
+        userService.deleteBatch(ids);
     }
 
 

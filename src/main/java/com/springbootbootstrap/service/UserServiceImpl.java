@@ -45,4 +45,9 @@ public class UserServiceImpl implements UserService{
         return TableData.empty();
     }
 
+    @Override
+    public void deleteBatch(String ids) {
+        userDao.deleteByIds(ids);
+    }
+
 }

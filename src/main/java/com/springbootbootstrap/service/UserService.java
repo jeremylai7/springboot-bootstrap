@@ -24,4 +24,10 @@ public interface UserService {
      */
     TableData<User> getTableData(PageBean pageBean);
 
+    /**
+     * 批量删除
+     * @param ids id集合 用,隔开
+     */
+    void deleteBatch(String ids);
+
 }
