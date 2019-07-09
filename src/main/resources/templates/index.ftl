@@ -91,9 +91,9 @@
 
         //提交
         $("#btn-submit").click(function () {
-
             $.post("${ctx}/index/add",$('#form').serializeArray(),function (result) {
-                $('#myModal').modal('hide')
+                $('#myModal').modal('hide');
+                location.reload();
             })
 
         })
@@ -101,7 +101,6 @@
         $("#del").click(function () {
             var select = $("#table").bootstrapTable('getSelections');
             //批量删除
-            console.log(select);
             var ids = "";
             for(var i = 0;i < select.length;i++){
                 ids +=","+select[i].id;
@@ -109,7 +108,7 @@
             ids = ids.substr(1);
             if(ids != ""){
                 $.post("${ctx}/index/delete",{ids:ids},function (result) {
-                    console.log(result);
+                    location.reload();
                 })
             }
 
