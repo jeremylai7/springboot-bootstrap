@@ -66,8 +66,8 @@
             </table>
         </div>
         <div class="row">
-            <button type="button" id="add" data-target="#myModal" data-toggle="modal" class="btn btn-primary pull-right">新增</button>
-            <button type="button" id="del" class="btn btn-success pull-right">删除</button>
+            <button type="button" id="add" data-target="#myModal" data-toggle="modal" class="btn btn-primary pull-right" style="margin-left: 10px">新增</button>
+            <button type="button" id="del" class="btn btn-success pull-right" >删除</button>
         </div>
     </div>
     <script src="${ctx}/js/jquery.min.js"></script>
