@@ -30,4 +30,11 @@ public interface UserService {
      */
     void deleteBatch(String ids);
 
+    /**
+     * 添加
+     * @param username  用户名
+     * @param password  密码
+     * @param age        年龄
+     */
+    void add(String username, String password, Integer age);
 }

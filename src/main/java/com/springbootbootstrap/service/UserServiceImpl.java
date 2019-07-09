@@ -50,4 +50,22 @@ public class UserServiceImpl implements UserService{
         userDao.deleteByIds(ids);
     }
 
+    @Override
+    public void add(String username, String password, Integer age) {
+        Example example = new Example(User.class);
+        Example.Criteria  criteria = example.createCriteria();
+        criteria.andEqualTo("username",username);
+        List<User> list = userDao.selectByExample(example);
+        if (list.size() == 0){
+            User user = new User();
+            user.setUsername(username);
+            user.setPassword(password);
+            user.setAge(age);
+            user.setRoleId("8");
+            user.setTop(false);
+            user.setUserType("NL");
+            userDao.insertSelective(user);
+        }
+    }
+
 }

@@ -8,6 +8,44 @@
     <link href="${ctx}/css/bootstrap-table.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="form">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="username" id="Username" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" name="password" class="form-control" id="psd" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAge" class="col-sm-2 control-label">Age</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="age" class="form-control" id="age" placeholder="Age">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" id="btn-submit" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row">
 			<table id="table" data-toggle="table"  data-side-pagination="server" data-search="true"
@@ -28,7 +66,7 @@
             </table>
         </div>
         <div class="row">
-            <button type="button" id="add" class="btn btn-primary pull-right">新增</button>
+            <button type="button" id="add" data-target="#myModal" data-toggle="modal" class="btn btn-primary pull-right">新增</button>
             <button type="button" id="del" class="btn btn-success pull-right">删除</button>
         </div>
     </div>
@@ -48,8 +86,18 @@
         }
 
         $("#add").click(function () {
+            $("#myModalLabel").text("新增");
+        })
+
+        //提交
+        $("#btn-submit").click(function () {
+
+            $.post("${ctx}/index/add",$('#form').serializeArray(),function (result) {
+                $('#myModal').modal('hide')
+            })
 
         })
+
         $("#del").click(function () {
             var select = $("#table").bootstrapTable('getSelections');
             //批量删除
@@ -66,6 +114,8 @@
             }
 
         })
+
+
     </script>
 </body>
 </html>

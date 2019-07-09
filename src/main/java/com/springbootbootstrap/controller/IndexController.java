@@ -49,6 +49,12 @@ public class IndexController {
         userService.deleteBatch(ids);
     }
 
+    @PostMapping("/add")
+    @ResponseBody
+    public void add(String username,String password,Integer age){
+        userService.add(username,password,age);
+    }
+
 
 
 
