@@ -8,7 +8,7 @@ spring:
     config-location: classpath:/mybatis/config.xml
   mapper:
     not-empty: false
-    identity: MYSQL
+    identity: MYSQL            
   freemarker:
     request-context-attribute: request
 mybatis:
