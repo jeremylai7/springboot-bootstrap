@@ -3,12 +3,35 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>首页</title>
+    <title>用户后台管理系统</title>
     <link href="${ctx}/css/bootstrap.css" rel="stylesheet">
     <link href="${ctx}/css/bootstrap-table.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Modal -->
+    <div class="container">
+        <div class="row">
+			<table id="table" data-toggle="table"  data-side-pagination="server" data-search="true"
+                   data-pagination="true" data-query-params="queryParams"  data-pagination-loop="false"
+                   data-click-to-select="true" data-url="${ctx}/index/getTableData">
+                <thead>
+                    <tr>
+                        <th data-checkbox="true"></th>
+                        <th data-field="id" data-align="center" data-sortable="true">编号</th>
+                        <th data-field="roleId" data-align="center">角色id</th>
+                        <th data-field="username" data-align="center" data-sortable="true">用户名</th>
+                        <th data-field="age" data-align="center">年龄</th>
+                        <th data-field="top" data-align="center">是否为超级管理员</th>
+                        <th data-field="userType" data-align="center">用户类型</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="row">
+            <button type="button" id="add" data-target="#myModal" data-toggle="modal" class="btn btn-primary pull-right" style="margin-left: 10px">新增</button>
+            <button type="button" id="del" class="btn btn-success pull-right" >删除</button>
+        </div>
+    </div>
+    <!-- 弹出框 -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -43,31 +66,6 @@
                     <button type="button" id="btn-submit" class="btn btn-primary">提交</button>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-			<table id="table" data-toggle="table"  data-side-pagination="server" data-search="true"
-                   data-pagination="true" data-query-params="queryParams"  data-pagination-loop="false"
-                   data-click-to-select="true" data-url="${ctx}/index/getTableData">
-                <thead>
-                    <tr>
-                        <th data-checkbox="true"></th>
-                        <th data-field="id" data-align="center" 	data-sortable="true">id</th>
-                        <th data-field="roleId" data-align="center">rowid</th>
-                        <th data-field="username" data-align="center" data-sortable="true">username</th>
-                        <th data-field="password" data-align="center">password</th>
-                        <th data-field="age" data-align="center">age</th>
-                        <th data-field="top" data-align="center">top</th>
-                        <th data-field="userType" data-align="center">userType</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <div class="row">
-            <button type="button" id="add" data-target="#myModal" data-toggle="modal" class="btn btn-primary pull-right" style="margin-left: 10px">新增</button>
-            <button type="button" id="del" class="btn btn-success pull-right" >删除</button>
         </div>
     </div>
     <script src="${ctx}/js/jquery.min.js"></script>
@@ -113,8 +111,6 @@
             }
 
         })
-
-
     </script>
 </body>
 </html>

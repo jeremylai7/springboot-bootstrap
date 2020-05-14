@@ -19,15 +19,13 @@ import java.util.List;
 @Controller
 @RequestMapping("/index")
 public class IndexController {
+
     @Autowired
     private UserService userService;
 
     @GetMapping({"index.html","/"})
     public ModelAndView index(){
-        List<User> list = userService.list();
-        System.out.println(list);
-        ModelAndView mv = new ModelAndView("index");
-        return mv;
+        return new ModelAndView("index");
     }
 
     @GetMapping("/getTableData")
@@ -37,7 +35,7 @@ public class IndexController {
             pageBean.setLimit(10);
         }
         if (pageBean.getOffset() == null){
-            pageBean.setLimit(0);
+            pageBean.setOffset(0);
         }
         TableData<User> tableData = userService.getTableData(pageBean);
         return tableData;

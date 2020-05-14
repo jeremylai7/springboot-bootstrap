@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @Author: laizc
@@ -13,6 +14,7 @@ import javax.persistence.Id;
  */
 @Getter
 @Setter
+@Table(name = "t_user")
 public class User {
     //主键
     @Id
@@ -30,6 +32,7 @@ public class User {
 
     //年龄
     private Integer age;
+
     //是否是超级管理员
     private Boolean top;
 

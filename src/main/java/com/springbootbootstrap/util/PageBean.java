@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class PageBean {
     /**
-     * 开始显示的下标
+     * 第几条数据开始
      */
     private Integer offset;
 
