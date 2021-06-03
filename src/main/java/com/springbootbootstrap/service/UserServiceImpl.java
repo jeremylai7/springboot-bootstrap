@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService{
             }
             Example.Criteria criteria = example.createCriteria();
             if (StringUtils.isNotBlank(pageBean.getSearch())){
-                criteria.andLike(pageBean.getSort(),"%"+pageBean.getSearch()+"%");
+                criteria.andLike("username","%"+pageBean.getSearch()+"%");
             }
             List<User> list = userDao.selectByExample(example);
             return TableData.bulid(count,list);
