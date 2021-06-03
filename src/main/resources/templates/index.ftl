@@ -26,10 +26,17 @@
                 </thead>
             </table>
         </div>
+        <div id="selectOne" class="row alert alert-warning hide">
+            <a href="#" class="close" data-dismiss="alert">
+                &times;
+            </a>
+            <strong>警告！</strong>请至少选中一条数据。
+        </div>
         <div class="row">
             <button type="button" id="add" data-target="#myModal" data-toggle="modal" class="btn btn-primary pull-right" style="margin-left: 10px">新增</button>
-            <button type="button" id="del" class="btn btn-success pull-right" >删除</button>
+            <button type="button" id="confirmDelete" class="btn btn-danger pull-right">删除</button>
         </div>
+
     </div>
     <!-- 弹出框 -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -68,6 +75,25 @@
             </div>
         </div>
     </div>
+    <!-- 删除确认 -->
+    <div class="modal fade" id="delcfmModel">
+        <div class="modal-dialog">
+            <div class="modal-content message_align">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">提示信息</h4>
+                </div>
+                <div class="modal-body">
+                    <p>您确认要删除吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="url"/>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <a id="del" class="btn btn-success" data-dismiss="modal">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="${ctx}/js/jquery.min.js"></script>
     <script src="${ctx}/js/bootstrap.js"></script>
     <script src="${ctx}/js/bootstrap-table.js"></script>
@@ -95,10 +121,20 @@
             })
 
         })
+        //确认删除
+        $("#confirmDelete").click(function () {
+            var select = $("#table").bootstrapTable('getSelections');
+            if (select.length == 0) {
+                $("#selectOne").removeClass("hide");
+            } else {
+                $("#selectOne").addClass("hide");
+                $('#delcfmModel').modal('show');
+            }
+        })
 
+        //批量删除
         $("#del").click(function () {
             var select = $("#table").bootstrapTable('getSelections');
-            //批量删除
             var ids = "";
             for(var i = 0;i < select.length;i++){
                 ids +=","+select[i].id;
@@ -109,8 +145,8 @@
                     location.reload();
                 })
             }
-
         })
+
     </script>
 </body>
 </html>

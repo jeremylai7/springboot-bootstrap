@@ -53,8 +53,4 @@ public class IndexController {
         userService.add(username,password,age);
     }
 
-
-
-
-
 }
