@@ -4,8 +4,6 @@ spring:
     username: root
     password: 1234561
     driver-class-name: com.mysql.cj.jdbc.Driver
-  mybatis:
-    config-location: classpath:/mybatis/config.xml
   mapper:
     not-empty: false
     identity: MYSQL            
@@ -13,4 +11,5 @@ spring:
     request-context-attribute: request
 mybatis:
   config-location: classpath:/mybatis/config.xml
+  mapper-locations: classpath:mapper/**/*.xml
 

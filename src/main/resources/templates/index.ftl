@@ -7,6 +7,13 @@
     <link href="${ctx}/css/bootstrap.css" rel="stylesheet">
     <link href="${ctx}/css/bootstrap-table.css" rel="stylesheet">
 </head>
+    <style>
+        .foot {
+            position:absolute;
+            bottom:0px;
+            left: 17%;
+        }
+    </style>
 <body>
     <div class="container">
         <div class="row">
@@ -31,6 +38,7 @@
             <button type="button" id="del" class="btn btn-success pull-right" >删除</button>
         </div>
     </div>
+
     <!-- 弹出框 -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -66,6 +74,23 @@
                     <button type="button" id="btn-submit" class="btn btn-primary">提交</button>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="foot container">
+        <div class="row">
+            <table id="table" data-toggle="table"  data-side-pagination="server"
+                   data-pagination="true" data-pagination-loop="false"
+                   data-url="${ctx}/access-log/getTableData">
+                <thead>
+                <tr>
+                    <th data-field="id" data-align="center" data-sortable="true">编号</th>
+                    <th data-field="ip" data-align="center">ip地址</th>
+                    <th data-field="browser" data-align="center">浏览器</th>
+                    <th data-field="pc" data-align="center">电脑版本</th>
+                    <th data-field="createTime" data-align="center">访问时间</th>
+                </tr>
+                </thead>
+            </table>
         </div>
     </div>
     <script src="${ctx}/js/jquery.min.js"></script>
