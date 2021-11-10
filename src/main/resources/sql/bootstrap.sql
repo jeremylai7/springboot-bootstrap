@@ -17,3 +17,12 @@ INSERT INTO `t_user` VALUES ('4', '1', 'apple3', 'fe895fc2989c3ff0af142b62d3be3a
 INSERT INTO `t_user` VALUES ('9', '1', 'apple4', 'fe895fc2989c3ff0af142b62d3be3a8d98a923',23, '0', 'NL');
 INSERT INTO `t_user` VALUES ('10', '8', 'apple5','fe895fc2989c3ff0af142b62d3be3a8d98a923',24, '0', 'NL');
 INSERT INTO `t_user` VALUES ('11', '8', '46464', 'fe895fc2989c3ff0af142b62d3be3a8d98a923',25, '0', 'NL');
+
+create table t_access_log (
+  `id` bigint not null auto_increment,
+  `ip` varchar(32) null comment "ip地址",
+  `browser` varchar(32) comment "浏览器",
+  `pc` varchar(32) comment "电脑",
+  create_time timestamp not null default current_timestamp comment "访问时间",
+  primary key(`id`)
+)
