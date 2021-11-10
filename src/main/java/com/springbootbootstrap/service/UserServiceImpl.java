@@ -32,11 +32,16 @@ public class UserServiceImpl implements UserService{
         if (count > 0){
             PageHelper.startPage((pageBean.getOffset()/pageBean.getLimit()) + 1, pageBean.getLimit());
             Example example = new Example(User.class);
+            //sort
             if (StringUtils.isNotBlank(pageBean.getOrder())){
                 example.setOrderByClause(pageBean.getSort()+" "+pageBean.getOrder());
             }
             Example.Criteria criteria = example.createCriteria();
+            //search
             if (StringUtils.isNotBlank(pageBean.getSearch())){
+            	if (StringUtils.isBlank(pageBean.getSort())) {
+            		pageBean.setSort("username");
+	            }
                 criteria.andLike(pageBean.getSort(),"%"+pageBean.getSearch()+"%");
             }
             List<User> list = userDao.selectByExample(example);
