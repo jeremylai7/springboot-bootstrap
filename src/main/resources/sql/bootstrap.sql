@@ -21,7 +21,7 @@ INSERT INTO `t_user` VALUES ('11', '8', '46464', 'fe895fc2989c3ff0af142b62d3be3a
 create table t_access_log (
   `id` bigint not null auto_increment,
   `ip` varchar(32) null comment "ip地址",
-  `browser` varchar(32) comment "浏览器",
+  `browser` varchar(64) comment "浏览器",
   `pc` varchar(32) comment "电脑",
   create_time timestamp not null default current_timestamp comment "访问时间",
   primary key(`id`)
