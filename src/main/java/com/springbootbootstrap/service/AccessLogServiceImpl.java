@@ -50,7 +50,6 @@ public class AccessLogServiceImpl implements AccessLogService{
     @Override
     public List<AccessLog> find() {
         List<AccessLog> lists = accessLogDao.find();
-        System.out.println(lists);
         return lists;
     }
 
