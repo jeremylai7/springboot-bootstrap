@@ -7,12 +7,10 @@ import com.springbootbootstrap.util.PageBean;
 import com.springbootbootstrap.util.TableData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author: laizc
@@ -20,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
  * @desc: 访问日志
  **/
 @CrossOrigin
-@Controller
+@RestController
 @RequestMapping("/access-log")
 public class AccessLogController {
 
@@ -28,7 +26,6 @@ public class AccessLogController {
     private AccessLogService accessLogService;
 
     @GetMapping("/getTableData")
-    @ResponseBody
     public TableData<AccessLog> getTableData(PageBean pageBean, HttpServletRequest request){
         if (pageBean.getLimit() == null){
             pageBean.setLimit(10);
@@ -38,6 +35,12 @@ public class AccessLogController {
         }
         TableData<AccessLog> tableData = accessLogService.getTableData(pageBean);
         return tableData;
+    }
+
+    @GetMapping("/find")
+    public List<AccessLog> find() {
+        List<AccessLog> list = accessLogService.find();
+        return list;
     }
 
 

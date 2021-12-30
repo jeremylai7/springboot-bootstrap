@@ -32,8 +32,6 @@ public class AccessLogServiceImpl implements AccessLogService{
 
     @Override
     public TableData<AccessLog> getTableData(PageBean pageBean) {
-        List<AccessLog> lists = accessLogDao.find();
-        System.out.println(lists);
         int count = accessLogDao.selectCount(null);
         if (count > 0) {
             PageHelper.startPage((pageBean.getOffset()/pageBean.getLimit()) + 1,pageBean.getLimit());
@@ -49,8 +47,11 @@ public class AccessLogServiceImpl implements AccessLogService{
         return TableData.empty();
     }
 
-    public static void main(String[] args) {
-        Date now = new Date();
-        System.out.println(now);
+    @Override
+    public List<AccessLog> find() {
+        List<AccessLog> lists = accessLogDao.find();
+        System.out.println(lists);
+        return lists;
     }
+
 }
