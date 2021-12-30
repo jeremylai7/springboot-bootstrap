@@ -31,6 +31,8 @@ public class IndexController {
     @Autowired
     private AccessLogService accessLogService;
 
+    private final String SPLIT = "\\(|\\)";
+
     @GetMapping({"index.html","/"})
     public ModelAndView index(){
         return new ModelAndView("index");
@@ -46,7 +48,6 @@ public class IndexController {
             pageBean.setOffset(0);
         }
         TableData<User> tableData = userService.getTableData(pageBean);
-
         addLog(request);
         return tableData;
     }
@@ -69,26 +70,19 @@ public class IndexController {
         Enumeration<String> enumerations = request.getHeaderNames();
         AccessLog accessLog = new AccessLog();
         accessLog.setIp(ip);
-        System.out.println("--------begin---------");
         while (enumerations.hasMoreElements()) {
             String headerName = enumerations.nextElement();
-            String headerValue = request.getHeader(headerName);
-            System.out.println("name:" + headerName + ";value:" + headerValue);
-            switch (headerName) {
-                case "sec-ch-ua":
-                    accessLog.setBrowser(request.getHeader(headerName).split(";")[0]);
-                    break;
-                case  "sec-ch-ua-platform":
-                    accessLog.setPc(request.getHeader(headerName));
-                    break;
-                default:
-                    break;
+            if (headerName.equals("user-agent")) {
+                String headerValue = request.getHeader(headerName);
+                String[] array = headerValue.split(SPLIT);
+                if (array.length >0) {
+                    accessLog.setPc(array[1].split(";")[1]);
+                    accessLog.setBrowser(array[4]);
+                }
+                break;
             }
         }
-        System.out.println("-------end------------");
         accessLogService.add(accessLog);
     }
-
-
 
 }
