@@ -43,5 +43,15 @@ public class AccessLogController {
         return list;
     }
 
+    public class CreateConnectionThread extends Thread {
+
+        @Override
+        public void run() {
+            super.run();
+        }
+    }
+
 
 }
+
+

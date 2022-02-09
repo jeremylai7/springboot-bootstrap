@@ -9,9 +9,8 @@
 </head>
     <style>
         .foot {
-            position:absolute;
-            bottom:0px;
-            left: 17%;
+            position:relative;
+            top: 50px;
         }
     </style>
 <body>
