@@ -32,6 +32,7 @@ public class AccessLogController {
         }
         if (pageBean.getOffset() == null){
             pageBean.setOffset(0);
+
         }
         TableData<AccessLog> tableData = accessLogService.getTableData(pageBean);
         return tableData;
