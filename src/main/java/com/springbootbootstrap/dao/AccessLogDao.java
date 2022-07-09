@@ -1,6 +1,7 @@
 package com.springbootbootstrap.dao;
 
 import com.springbootbootstrap.model.AccessLog;
+import com.springbootbootstrap.util.MyMapper;
 import tk.mybatis.mapper.common.IdsMapper;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @date: created in 2021/11/10
  * @desc:
  **/
-public interface AccessLogDao extends Mapper<AccessLog>, IdsMapper<AccessLog> {
+public interface AccessLogDao extends MyMapper<AccessLog> {
 
     List<AccessLog> find();
 }

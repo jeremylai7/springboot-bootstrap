@@ -1,5 +1,6 @@
 package com.springbootbootstrap.service;
 
+import com.springbootbootstrap.util.MyMapper;
 import com.springbootbootstrap.util.PageBean;
 import com.springbootbootstrap.util.TableData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 
 
     @Autowired
-    private Mapper<T> mapper;
+    private MyMapper<T> mapper;
 
     @Override
     public List<T> selectAll() {

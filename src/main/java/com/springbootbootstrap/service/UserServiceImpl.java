@@ -17,7 +17,7 @@ import java.util.List;
  * @Date: Created in 10:05 2019-06-27
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl extends BaseServiceImpl<User> implements UserService{
     @Resource
     private UserDao userDao;
 

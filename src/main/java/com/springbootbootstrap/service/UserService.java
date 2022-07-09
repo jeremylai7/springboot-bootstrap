@@ -10,7 +10,7 @@ import java.util.List;
  * @Author: laizc
  * @Date: Created in 10:04 2019-06-27
  */
-public interface UserService {
+public interface UserService extends BaseService<User>{
     /**
      * 获取全部数据
      * @return
