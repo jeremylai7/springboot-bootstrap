@@ -24,8 +24,23 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     @Override
+    public int selectCount() {
+        return mapper.selectCount(null);
+    }
+
+    @Override
+    public List<T> selectByExample(Object o) {
+        return mapper.selectByExample(o);
+    }
+
+    @Override
     public int save(T t) {
         return mapper.insert(t);
+    }
+
+    @Override
+    public int saveSelective(T t) {
+        return mapper.insertSelective(t);
     }
 
     @Override
@@ -36,6 +51,11 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     @Override
     public int deleteByPrimaryKey(int t) {
         return mapper.deleteByPrimaryKey(t);
+    }
+
+    @Override
+    public int deleteByIds(String ids) {
+        return mapper.deleteByIds(ids);
     }
 
     @Override

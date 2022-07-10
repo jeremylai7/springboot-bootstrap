@@ -18,17 +18,17 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService{
-    @Resource
-    private UserDao userDao;
+
+
 
     @Override
     public List<User> list(){
-        return userDao.selectAll();
+        return this.selectAll();
     }
 
     @Override
     public TableData<User> getTableData(PageBean pageBean) {
-        int count = userDao.selectCount(null);
+        int count = this.selectCount();
         if (count > 0){
             PageHelper.startPage((pageBean.getOffset()/pageBean.getLimit()) + 1, pageBean.getLimit());
             Example example = new Example(User.class);
@@ -44,7 +44,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	            }
                 criteria.andLike(pageBean.getSort(),"%"+pageBean.getSearch()+"%");
             }
-            List<User> list = userDao.selectByExample(example);
+            List<User> list = this.selectByExample(example);
             return TableData.bulid(count,list);
         }
         return TableData.empty();
@@ -52,7 +52,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     @Override
     public void deleteBatch(String ids) {
-        userDao.deleteByIds(ids);
+        this.deleteByIds(ids);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         Example example = new Example(User.class);
         Example.Criteria  criteria = example.createCriteria();
         criteria.andEqualTo("username",username);
-        List<User> list = userDao.selectByExample(example);
+        List<User> list = this.selectByExample(example);
         if (list.size() == 0){
             User user = new User();
             user.setUsername(username);
@@ -69,7 +69,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
             user.setRoleId("8");
             user.setTop(false);
             user.setUserType("NL");
-            userDao.insertSelective(user);
+            this.save(user);
         }
     }
 

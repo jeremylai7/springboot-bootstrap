@@ -17,6 +17,15 @@ public interface BaseService<T> {
      */
     List<T> selectAll();
 
+
+    /**
+     * 查询数据数量
+     * @return
+     */
+    int selectCount();
+
+    List<T> selectByExample(Object o);
+
     /**
      * 添加
      *
@@ -25,6 +34,9 @@ public interface BaseService<T> {
      * @return
      */
     int save(T t);
+
+
+    int saveSelective(T t);
 
     /**
      * 修改
@@ -43,6 +55,8 @@ public interface BaseService<T> {
      * @return
      */
     int deleteByPrimaryKey(int t);
+
+    int deleteByIds(String ids);
 
     /**
      * 查询表格列表
