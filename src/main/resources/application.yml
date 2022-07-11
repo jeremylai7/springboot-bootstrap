@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://sh-cynosdbmysql-grp-ar201mbc.sql.tencentcdb.com:21857/blog?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
-    password: XXXX
+    password: xxxx
     driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
       break-after-acquire-failure: true
@@ -15,4 +15,10 @@ spring:
 mybatis:
   config-location: classpath:/mybatis/config.xml
   mapper-locations: classpath:mapper/**/*.xml
+
+
+# 自定义配置
+
+weixin:
+  openid: 123456
 
