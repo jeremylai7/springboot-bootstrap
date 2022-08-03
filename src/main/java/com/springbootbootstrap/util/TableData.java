@@ -40,8 +40,7 @@ public class TableData<T> {
      * @return
      */
     public static <T> TableData<T> empty(){
-        return new TableData<>(0,new ArrayList<>(0));
+        return new TableData<T>(0,new ArrayList<T>(0));
     }
-
 
 }
