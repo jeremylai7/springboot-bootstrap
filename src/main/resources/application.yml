@@ -1,12 +1,14 @@
 spring:
   datasource:
-    url: jdbc:mysql://sh-cynosdbmysql-grp-ar201mbc.sql.tencentcdb.com:21857/blog?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://34.92.244.82:3306/blog?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
-    password: xxxx
+    password: xxxxx
     driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
       break-after-acquire-failure: true
       connection-error-retry-attempts: 3
+  jmx:
+    default-domain: bootstrap
   mapper:
     not-empty: false
     identity: MYSQL            
