@@ -24,5 +24,9 @@ create table t_access_log (
   `browser` varchar(64) comment "浏览器",
   `pc` varchar(64) comment "电脑",
   create_time timestamp not null default current_timestamp comment "访问时间",
+  `country`  varchar(32) comment "国家",
+  `region_name`  varchar(32) comment "省份",
+  `city`  varchar(32) comment "市",
   primary key(`id`)
 )
+

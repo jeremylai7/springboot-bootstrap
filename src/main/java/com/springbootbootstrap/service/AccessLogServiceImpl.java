@@ -1,5 +1,6 @@
 package com.springbootbootstrap.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.springbootbootstrap.dao.AccessLogDao;
 import com.springbootbootstrap.model.AccessLog;
@@ -33,7 +34,15 @@ public class AccessLogServiceImpl implements AccessLogService{
     @Override
     public void add(AccessLog accessLog) {
         String ip = accessLog.getIp();
-        String result = restTemplate.postForObject("https://tool.lu/ip/ajax.html?ip=",String.class);
+        JSONObject result = restTemplate.getForObject("http://ip-api.com/json/" + ip + "?lang=zh-CN", JSONObject.class);
+        if ("success".equals(result.getString("status"))) {
+            String country = result.getString("country");
+            String city = result.getString("city");
+            String regionName = result.getString("regionName");
+            accessLog.setCountry(country);
+            accessLog.setRegionName(regionName);
+            accessLog.setCity(city);
+        }
         accessLogDao.insert(accessLog);
     }
 

@@ -47,4 +47,19 @@ public class AccessLog {
     @Transient
     private String createTimeStr;
 
+    /**
+     * 国家
+     */
+    private String country;
+
+    /**
+     * 省份
+     */
+    private String regionName;
+
+    /**
+     * 市
+     */
+    private String city;
+
 }
