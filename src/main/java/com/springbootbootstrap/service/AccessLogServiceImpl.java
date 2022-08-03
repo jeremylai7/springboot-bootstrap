@@ -6,7 +6,9 @@ import com.springbootbootstrap.model.AccessLog;
 import com.springbootbootstrap.model.User;
 import com.springbootbootstrap.util.PageBean;
 import com.springbootbootstrap.util.TableData;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
@@ -25,8 +27,13 @@ public class AccessLogServiceImpl implements AccessLogService{
     @Resource
     private AccessLogDao accessLogDao;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     @Override
     public void add(AccessLog accessLog) {
+        String ip = accessLog.getIp();
+        String result = restTemplate.postForObject("https://tool.lu/ip/ajax.html?ip=",String.class);
         accessLogDao.insert(accessLog);
     }
 

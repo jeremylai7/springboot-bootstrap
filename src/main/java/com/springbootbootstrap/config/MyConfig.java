@@ -20,7 +20,6 @@ public class MyConfig {
         PageBean bean = new PageBean();
         bean.setLimit(3);
         String openId = weixinProperties.getOpenId();
-        System.out.println(openId);
         return bean;
 
     }
