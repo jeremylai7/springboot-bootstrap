@@ -54,8 +54,8 @@ public class AccessLogServiceImpl implements AccessLogService{
             Example example = new Example(AccessLog.class);
             example.setOrderByClause("id desc");
             List<AccessLog> list = accessLogDao.selectByExample(example);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             for (AccessLog accessLog : list) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 accessLog.setCreateTimeStr(sdf.format(accessLog.getCreateTime()));
             }
             return TableData.bulid(count,list);
