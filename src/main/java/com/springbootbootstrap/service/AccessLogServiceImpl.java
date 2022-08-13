@@ -7,6 +7,7 @@ import com.springbootbootstrap.model.AccessLog;
 import com.springbootbootstrap.model.User;
 import com.springbootbootstrap.util.PageBean;
 import com.springbootbootstrap.util.TableData;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: laizc
@@ -24,6 +26,8 @@ import java.util.List;
  **/
 @Service
 public class AccessLogServiceImpl implements AccessLogService{
+
+    private static final String URL = "https://api.beijinxuetang.com/api/common/ip";
 
     @Resource
     private AccessLogDao accessLogDao;
@@ -34,14 +38,23 @@ public class AccessLogServiceImpl implements AccessLogService{
     @Override
     public void add(AccessLog accessLog) {
         String ip = accessLog.getIp();
-        JSONObject result = restTemplate.getForObject("http://ip-api.com/json/" + ip + "?lang=zh-CN", JSONObject.class);
-        if ("success".equals(result.getString("status"))) {
-            String country = result.getString("country");
-            String city = result.getString("city");
-            String regionName = result.getString("regionName");
-            accessLog.setCountry(country);
-            accessLog.setRegionName(regionName);
+        String brower = accessLog.getBrowser();
+        if (StringUtils.isNotBlank(brower) && brower.length() > 64) {
+            accessLog.setBrowser(accessLog.getBrowser().substring(0,64));
+        }
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ip",ip);
+        JSONObject json = restTemplate.postForObject(URL,jsonObject, JSONObject.class);
+        //JSONObject result = restTemplate.getForObject("http://ip-api.com/json/" + ip + "?lang=zh-CN", JSONObject.class);
+        if (json.getInteger("code") == 0) {
+            json = json.getJSONObject("data");
+            String nation = json.getString("nation");
+            String province = json.getString("province");
+            String city = json.getString("city");
+            accessLog.setCountry(nation);
+            accessLog.setRegionName(province);
             accessLog.setCity(city);
+
         }
         accessLogDao.insert(accessLog);
     }
