@@ -1,5 +1,6 @@
 package com.springbootbootstrap.service;
 
+import com.springbootbootstrap.model.AccessLog;
 import com.springbootbootstrap.model.User;
 import com.springbootbootstrap.util.PageBean;
 import com.springbootbootstrap.util.TableData;
@@ -37,4 +38,6 @@ public interface UserService extends BaseService<User>{
      * @param age        年龄
      */
     void add(String username, String password, Integer age);
+
+    void update(AccessLog accessLog);
 }

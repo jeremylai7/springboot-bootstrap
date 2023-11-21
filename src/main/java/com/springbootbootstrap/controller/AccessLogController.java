@@ -52,6 +52,11 @@ public class AccessLogController {
         }
     }
 
+    @GetMapping("/test")
+    public void test(String id) {
+        accessLogService.test(id);
+    }
+
 
 }
 

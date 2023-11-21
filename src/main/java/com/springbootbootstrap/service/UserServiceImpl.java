@@ -1,12 +1,16 @@
 package com.springbootbootstrap.service;
 
 import com.github.pagehelper.PageHelper;
+import com.springbootbootstrap.dao.AccessLogDao;
 import com.springbootbootstrap.dao.UserDao;
+import com.springbootbootstrap.model.AccessLog;
 import com.springbootbootstrap.model.User;
 import com.springbootbootstrap.util.PageBean;
 import com.springbootbootstrap.util.TableData;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
@@ -71,6 +75,26 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
             user.setUserType("NL");
             this.save(user);
         }
+    }
+
+    @Resource
+    private UserDao userDao;
+
+    @Resource
+    private AccessLogDao accessLogDao;
+
+    @Override
+    @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRES_NEW)
+    public void update(AccessLog accessLog) {
+        User user = new User();
+        user.setAge(10);
+        user.setPassword("4242");
+        userDao.insert(user);
+        AccessLog log = new AccessLog();
+        log.setId(accessLog.getId());
+        log.setPc(accessLog.getPc()+ "哦哦");
+        accessLogDao.updateByPrimaryKeySelective(log);
+
     }
 
 }

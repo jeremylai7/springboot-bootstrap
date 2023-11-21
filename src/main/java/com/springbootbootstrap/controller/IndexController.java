@@ -10,6 +10,8 @@ import com.springbootbootstrap.util.PageBean;
 import com.springbootbootstrap.util.TableData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -84,5 +86,27 @@ public class IndexController {
         }
         accessLogService.add(accessLog);
     }
+
+    /*@Transactional(rollbackFor = Exception.class)
+    public void orderPass() {
+        // 更新订单审核状态
+        updateOrderAuditStatus(id);
+        try {
+            updatePutInStorage(id);
+        } catch (Exception e) {
+            System.out.println("更新出库失败");
+        }
+
+    }
+
+    @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRES_NEW)
+    public void updatePutInStorage(Long id) throws Exception{
+        // 添加入库
+        addPutInStorage(id);
+        // 更新订单入库状态
+        updateOrderStorageStatus(id);
+        System.out.println("更新出库成功");
+    }*/
+
 
 }

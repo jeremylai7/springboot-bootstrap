@@ -18,4 +18,6 @@ public interface AccessLogService {
     TableData<AccessLog> getTableData(PageBean pageBean);
 
     List<AccessLog> find();
+
+    void test(String id);
 }

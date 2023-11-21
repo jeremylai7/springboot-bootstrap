@@ -3,6 +3,7 @@ package com.springbootbootstrap.service;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.springbootbootstrap.dao.AccessLogDao;
+import com.springbootbootstrap.dao.UserDao;
 import com.springbootbootstrap.model.AccessLog;
 import com.springbootbootstrap.model.User;
 import com.springbootbootstrap.util.PageBean;
@@ -10,6 +11,8 @@ import com.springbootbootstrap.util.TableData;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import tk.mybatis.mapper.entity.Example;
 
@@ -42,6 +45,7 @@ public class AccessLogServiceImpl implements AccessLogService{
         if (StringUtils.isNotBlank(brower) && brower.length() > 64) {
             accessLog.setBrowser(accessLog.getBrowser().substring(0,64));
         }
+        accessLog.setCreateTime(new Date());
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ip",ip);
         JSONObject json = restTemplate.postForObject(URL,jsonObject, JSONObject.class);
@@ -80,6 +84,38 @@ public class AccessLogServiceImpl implements AccessLogService{
     public List<AccessLog> find() {
         List<AccessLog> lists = accessLogDao.find();
         return lists;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRED)
+    public void test(String id) {
+        AccessLog accessLog = accessLogDao.selectByIds("11").get(0);
+        AccessLog log = new AccessLog();
+        log.setId(accessLog.getId());
+        log.setBrowser(accessLog.getBrowser() + "哈哈");
+        accessLogDao.updateByPrimaryKeySelective(log);
+        userService.update(accessLog);
+
+
+
+    }
+
+    @Resource
+    private UserDao userDao;
+
+    @Autowired
+    private UserService userService;
+
+    @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRES_NEW)
+    public void update(AccessLog accessLog) {
+        User user = new User();
+        user.setAge(10);
+        user.setPassword("4242");
+        userDao.insert(user);
+        AccessLog log = new AccessLog();
+        log.setId(accessLog.getId());
+        log.setPc(accessLog.getPc()+ "哦哦");
+        accessLogDao.updateByPrimaryKeySelective(log);
     }
 
 }
